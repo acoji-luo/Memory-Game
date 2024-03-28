@@ -1,0 +1,65 @@
+body {
+    font-family: "Lato", sans-serif;
+    font-weight: 700;
+}
+
+.game {
+    padding: 40px 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.card {
+    padding: 40px;
+    height: 240px;
+    background-color: #c24241;
+    font-size: 0;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+
+.card:hover {
+    background-color: rgb(214, 108, 108);
+}
+
+.card:active {
+    background-color: rgb(189, 66, 66);
+}
+
+.visible {
+    font-size: 32px;
+    color: black;
+    background-color: #dacf8d;
+    cursor: default;
+}
+
+.visible:hover {
+    background-color: #dacf8d;
+}
+
+.visible:active {
+    background-color: #dacf8d;
+}
+
+.match {
+    font-size: 32px;
+    color: black;
+    background-color: #cddf68;
+    cursor: default;
+}
+
+.match:hover {
+    background-color: #cddf68;
+}
+
+.match:active {
+    background-color: #cddf68;
+}
