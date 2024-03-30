@@ -5,6 +5,11 @@ const startGame = (game, cardCount) => {
     let firstCard = null;
     let secondCard = null;
 
+    const clearVisible = () => {
+        firstCard.classList.remove("visible");
+        secondCard.classList.remove("visible");
+    }
+
     for (let i = 1; i <= cardCount; i++) {
         cardNumberArray.push(i, i);
     }
@@ -37,6 +42,8 @@ const startGame = (game, cardCount) => {
 
     game.style = `grid-template-columns: repeat(${columns}, 1fr);`;
 
+    let isOpen = false;
+
     for (const cardNumber of cardNumberArray) {
         let card = document.createElement("div");
         card.textContent = cardNumber;
@@ -44,18 +51,22 @@ const startGame = (game, cardCount) => {
         card.classList.add("card");
 
         card.addEventListener("click", function () {
+            if (isOpen) {
+                return;
+            }
+
             if (card.classList.contains("visible") || card.classList.contains("match")) {
                 return;
             }
 
             if (firstCard != null && secondCard != null) {
-                firstCard.classList.remove("visible");
-                secondCard.classList.remove("visible");
+                clearVisible();
                 firstCard = null;
                 secondCard = null;
             }
 
             card.classList.add("visible");
+
 
             if (firstCard === null) {
                 firstCard = card;
@@ -70,14 +81,17 @@ const startGame = (game, cardCount) => {
                 if (firstCardIndex === secondCardIndex) {
                     firstCard.classList.add("match");
                     secondCard.classList.add("match");
+                    clearVisible();
+                    isOpen = false;
                 }
 
-                // if (firstCard.classList.contains("visible") || secondCard.classList.contains("visible")) {
-                //     setTimeout(() => {
-                //         firstCard.classList.remove("visible");
-                //         secondCard.classList.remove("visible");
-                //     }, 2200);
-                // }
+                if (firstCard.classList.contains("visible") && secondCard.classList.contains("visible")) {
+                    isOpen = true;
+                    setTimeout(() => {
+                        clearVisible();
+                        isOpen = false;
+                    }, 2200);
+                }
             }
             if (cardNumberArray.length === document.querySelectorAll(".match").length) {
                 setTimeout(() => {
