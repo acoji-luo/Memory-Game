@@ -10,6 +10,26 @@ const startGame = (game, cardCount) => {
         secondCard.classList.remove("visible");
     }
 
+    const updateStyles = (isOpen) => {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            if (isOpen) {
+                card.classList.remove("card");
+                card.classList.add("noHoverActive");
+            }
+        });
+    }
+
+    const deleteOpen = () => {
+        const open = document.querySelectorAll('.noHoverActive');
+        open.forEach(card => {
+            if (!isOpen) {
+                card.classList.remove("noHoverActive");
+                card.classList.add("card");
+            }
+        });
+    }
+
     for (let i = 1; i <= cardCount; i++) {
         cardNumberArray.push(i, i);
     }
@@ -87,10 +107,12 @@ const startGame = (game, cardCount) => {
 
                 if (firstCard.classList.contains("visible") && secondCard.classList.contains("visible")) {
                     isOpen = true;
+                    updateStyles(isOpen);
                     setTimeout(() => {
                         clearVisible();
                         isOpen = false;
-                    }, 2200);
+                        deleteOpen(isOpen);
+                    }, 1800);
                 }
             }
             if (cardNumberArray.length === document.querySelectorAll(".match").length) {
